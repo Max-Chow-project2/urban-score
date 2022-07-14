@@ -8,6 +8,39 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
+    <header>
+        <h1>Urban Quality of Life</h1>
+        <p>Select a city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+    </header>
+    <main>
+
+        <div class="wrapper">
+
+            <!-- Dropdown list to select a city -->
+            <form action="#">
+                <label for="cities" class="sr-only">Select a city</label>
+                <select name="cities" id="cities">
+                    <option value="toronto">Toronto</option>
+                    <option value="vancouver">Vancouver</option>
+                    <option value="ottawa">Ottawa</option>
+                </select>
+                <button type="submit">Select this city</button>
+            </form>
     
+            <!-- Place the city name in this h2 -->
+            <h2 id="cityName"></h2>
+
+            <!-- Populate this ul with the city scores -->
+            <ul id="cityScores">
+                <!-- Template for Appending Scores -->
+                <!-- <li>
+                    <h3>Quality Indicator: </h3>
+                    <p class="score">Score</p>
+                </li> -->
+            </ul>
+
+        </div>
+
+    </main>
 </body>
 </html>
