@@ -19,7 +19,8 @@
             <!-- Dropdown list to select a city -->
             <form action="#">
                 <label for="cities" class="sr-only">Select a city</label>
-                <select name="cities" id="cities">
+                <select name="cities" id="cities" required>
+                    <option value selected disabled>Select an option</option>
                     <option value="toronto">Toronto</option>
                     <option value="vancouver">Vancouver</option>
                     <option value="ottawa">Ottawa</option>
@@ -42,5 +43,8 @@
         </div>
 
     </main>
+
+    <!-- JAVASCRIPT -->
+    <script src="./script.js"></script>
 </body>
 </html>
