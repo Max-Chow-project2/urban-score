@@ -39,20 +39,44 @@ qualityApp.populateDropdown = (cityListArray) => {
     })
 }
 
+// Getter Methods for the City
+qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].innerText;
+qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
+
 // Get the user's city selection
 qualityApp.getCity = () => {
     // Listen for user submission
     qualityApp.formElement.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Store the selected city API url
-        const selectedCityName = qualityApp.dropdownElement.selectedOptions[0].innerText;
-        const selectedCityHref = qualityApp.dropdownElement.value;
+        // Store the selected city name and API url
+        const selectedCityName = qualityApp.getCityName();
+        const selectedCityHref = qualityApp.getCityHref();
 
-        // Make an API call to get the selected city data endpoint
-        const url = new URL(`${selectedCityHref}scores/`);
+        // Make an API call to get to the required endpoints
+        const imagesUrl = new URL(`${selectedCityHref}images/`);
+        const scoresUrl = new URL(`${selectedCityHref}scores/`);
 
-        fetch(url)
+        // Connect to image endpoint and display image
+        fetch(imagesUrl)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
+        .then(function (imageData) {
+            const cityImageObject = imageData.photos[0];
+            console.log(cityImageObject);
+            qualityApp.displayImage(selectedCityName, cityImageObject);
+        })
+        .catch(function (error) {
+            alert(error.message);
+        })
+
+        // Connect to scores endpoint and display scores
+        fetch(scoresUrl)
         .then(function (response) {
             if (response.ok) {
                 return response.json();
@@ -61,9 +85,12 @@ qualityApp.getCity = () => {
             }
         })
         .then(function (cityData) {
+            console.log(cityData);
             const cityScoresArray = cityData.categories;
-            qualityApp.displayScores(selectedCityName, cityScoresArray)
-            console.log(selectedCityName);
+            const cityDescription = cityData.summary;
+            const cityAPIScore = cityData.teleport_city_score;
+            qualityApp.displaySummary(cityAPIScore, cityDescription);
+            qualityApp.displayScores(selectedCityName, cityScoresArray);
         })
         .catch(function(error) {
             alert(error.message);
@@ -71,6 +98,28 @@ qualityApp.getCity = () => {
 
     })
     
+}
+
+qualityApp.displayImage = (cityName, cityImage) => {
+    const cityImageElement = document.querySelector('#cityImage');
+    cityImageElement.src = ``;
+    cityImageElement.alt = ``;
+
+    cityImageElement.src = `${cityImage.image.web}`;
+    cityImageElement.alt = `Photograph of ${cityName}`;
+
+    console.log(cityImageElement);
+}
+
+qualityApp.displaySummary = (cityAPIScore, citySummary) => {
+    const cityAPIScoreElement = document.querySelector('#cityAPIScore');
+    const citySummaryElement = document.querySelector('#citySummary');
+
+    cityAPIScoreElement.textContent = `Overall Score: ${cityAPIScore.toFixed(1)} / 100`;
+
+    // This is used to strip extra <p> and <b> tags in the citySummary from the API
+    citySummaryElement.innerHTML = citySummary;
+    citySummaryElement.innerHTML = citySummaryElement.textContent;
 }
 
 qualityApp.displayScores = (cityName, cityScores) => {
@@ -86,7 +135,7 @@ qualityApp.displayScores = (cityName, cityScores) => {
     // Create and append the score list items
     cityScores.forEach(function (category) {
         const listElement = document.createElement('li');
-        listElement.innerHTML = `<h3>${category.name}: </h3><p class="score">${category.score_out_of_10.toFixed(1)}/10</p>`
+        listElement.innerHTML = `<h4>${category.name}: </h4><p class="score">${category.score_out_of_10.toFixed(1)}/10</p>`;
 
         cityScoresElement.append(listElement);
     })
