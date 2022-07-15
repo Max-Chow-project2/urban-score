@@ -5,53 +5,168 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Urban Quality of Life</title>
+
+    <!-- STYLESHEET -->
     <link rel="stylesheet" href="./styles/style.css">
+
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/acf2ac11d5.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <!-- ABOUT SECTION -->
     <header>
-        <h1>Urban Quality of Life</h1>
-        <p>Select a city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+        <div class="wrapper">
+            <h1>Urban Quality of Life</h1>
+            <p>Select a city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+        </div>
+        
     </header>
+
+    <!-- MAIN SECTION -->
     <main>
 
         <div class="wrapper">
 
-            <!-- Dropdown list to select a city -->
-            <form action="#">
-                <label for="cities" class="sr-only">Select a city</label>
-                <select name="cities" id="cities" required>
-                    <option value selected disabled>Select an option</option>
-                </select>
-                <button type="submit">Select this city</button>
-            </form>
+            <section class="userInput">
+                <!-- FORM: Dropdown list to select a city -->
+                <form action="#">
+                    <label for="cities" class="sr-only">Select a city</label>
+                    <select name="cities" id="cities" required>
+                        <option value selected disabled>Select an option</option>
+                    </select>
+
+                    <button type="submit">Select this city</button>
+                 </form>
+
+            </section> <!--END USER INPUT SECTION -->
+            
     
-            <!-- Place the city name in this <h2> -->
-            <h2 id="cityName"></h2>
+            <!-- API RESULTS SECTION -->
+            <section class="results">
+                <!-- Place the city name in this <h2> -->
+                <h2 id="cityName"></h2>
+                
+                <!-- Place the city's overall score from the API -->
+                <h3 id="cityAPIScore"></h3>
+     
+                
+                <!-- Place the user's calculated score from the API -->
+                <h3 id="cityUserScore"></h3>
+                
+                <!-- Place the city summary in this <p> -->
+                <p id="citySummary"></p>
+                
+                <!-- Place image of the city in this element -->
+                <img src="" alt="" id="cityImage">
 
-            <!-- Place the city's overall score from the API -->
-            <h3 id="cityAPIScore"></h3>
+                <!-- Dropdown list of categories to change visbility-->
+                <!-- Checkboxes to add/remove score categories -->
+                <div class="categoryContainer hidden">
+                    <h3 class="legend">Alter the categories you want to see
+                        <i class="fa-solid fa-sort-down" aria-hidden="true"></i>
+                    </h3>
+                    
+                    <fieldset>
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="housing" value="0" checked>
+                            <label for="housing">Housing</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="cost-of-living" value="1" checked>
+                            <label for="cost-of-living">Cost of Living</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="startups" value="2" checked>
+                            <label for="startups">Startups</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="venture-capital" value="3" checked>
+                            <label for="venture-capital">Venture Capital</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="travel-connectivity" value="4" checked>
+                            <label for="travel-connectivity">Travel Connectivity</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="commute" value="5" checked>
+                            <label for="commute">Commute</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="business-freedom" value="6" checked>
+                            <label for="business-freedom">Business Freedom</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="safety" value="7" checked>
+                            <label for="safety">Safety</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="healthcare" value="8" checked>
+                            <label for="healthcare">Healthcare</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="education" value="9" checked>
+                            <label for="education">Education</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="environmental-quality" value="10" checked>
+                            <label for="environmental-quality">Environmental Quality</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="economy" value="11" checked>
+                            <label for="economy">Economy</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="taxation" value="12" checked>
+                            <label for="taxation">Taxation</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="internet-access" value="13" checked>
+                            <label for="internet-access">Internet Access</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="leisure-and-culture" value="14" checked>
+                            <label for="leisure-and-culture">Leisure & Culture</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="tolerance" value="15" checked>
+                            <label for="tolerance">Tolerance</label>
+                        </div>
+                    
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="category" id="outdoors" value="16" checked>
+                            <label for="outdoors">Outdoors</label>
+                        </div>
+                    
+                    </fieldset> <!--END CATEGORY FIELDSET MENU-->
+                </div>
+                
+                
+                <!-- Populate this ul with the city scores -->
+                <ul id="cityScores">
+                    
+                </ul>
+            </section> <!--END RESULTS SECTION-->
+            
 
-            <!-- Place the user's calculated score from the API -->
-            <h3 id="cityUserScore"></h3>
+        </div> <!-- END WRAPPER -->
 
-            <!-- Place the city summary in this <p> -->
-            <p id="citySummary"></p>
-
-            <!-- Place image of the city in this element -->
-            <img src="" alt="" id="cityImage">
-
-            <!-- Populate this ul with the city scores -->
-            <ul id="cityScores">
-                <!-- Template for Appending Scores -->
-                <!-- <li>
-                    <h3>Quality Indicator: </h3>
-                    <p class="score">Score</p>
-                </li> -->
-            </ul>
-
-        </div>
-
-    </main>
+    </main> <!-- END MAIN -->
 
     <!-- JAVASCRIPT -->
     <script src="./script.js"></script>

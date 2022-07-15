@@ -91,6 +91,8 @@ qualityApp.getCity = () => {
             const cityAPIScore = cityData.teleport_city_score;
             qualityApp.displaySummary(cityAPIScore, cityDescription);
             qualityApp.displayScores(selectedCityName, cityScoresArray);
+            //city category checkbox
+            qualityApp.toggleScoreVisibility();
         })
         .catch(function(error) {
             alert(error.message);
@@ -123,6 +125,10 @@ qualityApp.displaySummary = (cityAPIScore, citySummary) => {
 }
 
 qualityApp.displayScores = (cityName, cityScores) => {
+
+    //Display category checkbox list
+    const categoryContainerElement = document.querySelector('.categoryContainer');
+    categoryContainerElement.classList.remove('hidden');
     
     // Display city name
     const cityNameElement = document.querySelector('#cityName');
@@ -133,14 +139,45 @@ qualityApp.displayScores = (cityName, cityScores) => {
     cityScoresElement.innerHTML = '';
 
     // Create and append the score list items
-    cityScores.forEach(function (category) {
+    cityScores.forEach(function (category, index) {
+
         const listElement = document.createElement('li');
+        const checkboxElement = document.querySelector(`input[value="${index}"]`);
+        
+
+        //if the checkbox category is not checked on load, hide the list item
+        if (!checkboxElement.checked) {
+            listElement.classList.add('hidden');
+        }
+
         listElement.innerHTML = `<h4>${category.name}: </h4><p class="score">${category.score_out_of_10.toFixed(1)}/10</p>`;
 
         cityScoresElement.append(listElement);
     })
-
 }
+
+qualityApp.toggleScoreVisibility = () => {
+    //target the checkbox elements
+    const checkboxElements = document.querySelectorAll('input');
+    //target the li elements
+    const listElements = document.querySelectorAll('li');
+    
+    console.log(checkboxElements);
+
+    checkboxElements.forEach((checkboxElement, index) => {
+        checkboxElement.addEventListener('change', function() {
+            //if it's checked, we show the category
+            if (checkboxElement.checked) {
+                listElements[index].classList.remove('hidden');
+            //if it's not checked we hide the category
+            } else {
+                listElements[index].classList.add('hidden');
+            }
+        })
+        
+    })
+}
+
 
 
 qualityApp.init = () => {
