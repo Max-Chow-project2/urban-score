@@ -18,7 +18,7 @@
     <header>
         <div class="wrapper">
             <h1>Urban Quality of Life</h1>
-            <p>Select a city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+            <p>First select a continent. Next, select city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
         </div>
         
     </header>
@@ -33,22 +33,22 @@
                 <form action="#">
                     <!-- Continent radio selection -->
                     <fieldset>
-                        <input type="radio" value="AF" id="africa">
+                        <input type="radio" value="AF" id="africa" name="continent" checked>
                         <label for="africa">Africa</label>
 
-                        <input type="radio" value="AS" id="asia">
+                        <input type="radio" value="AS" id="asia" name="continent">
                         <label for="asia">Asia</label>
 
-                        <input type="radio" value="EU" id="europe">
+                        <input type="radio" value="EU" id="europe" name="continent">
                         <label for="europe">Europe</label>
 
-                        <input type="radio" value="NA" id="north-america">
+                        <input type="radio" value="NA" id="north-america" name="continent">
                         <label for="north-america">North America</label>
 
-                        <input type="radio" value="OC" id="oceania">
+                        <input type="radio" value="OC" id="oceania" name="continent">
                         <label for="oceania">Oceania</label>
                         
-                        <input type="radio" value="SA" id="south-america">
+                        <input type="radio" value="SA" id="south-america" name="continent">
                         <label for="south-america">South America</label>
                     </fieldset>
 
@@ -57,9 +57,7 @@
                     <select name="cities" id="cities" required>
                         <option value selected disabled>Select an option</option>
                     </select>
-
-                    <button type="submit">Select this city</button>
-                 </form>
+                </form>
 
             </section> <!--END USER INPUT SECTION -->
             
@@ -71,10 +69,6 @@
                 
                 <!-- Place the city's overall score from the API -->
                 <h3 id="cityAPIScore"></h3>
-     
-                
-                <!-- Place the user's calculated score from the API -->
-                <h3 id="cityUserScore"></h3>
                 
                 <!-- Place the city summary in this <p> -->
                 <p id="citySummary"></p>
@@ -85,8 +79,8 @@
                 <!-- Dropdown list of categories to change visbility-->
                 <!-- Checkboxes to add/remove score categories -->
                 <div class="categoryContainer hidden">
-                    <h3 class="legend">Alter the categories you want to see
-                        <i class="fa-solid fa-sort-down" aria-hidden="true"></i>
+                    <h3 class="legend"><i class="fa-solid fa-angle-down" aria-hidden="true"></i> Alter the categories you want to see <span id="hiddenScoreCount"></span>
+                        
                     </h3>
                     
                     <fieldset>
@@ -177,7 +171,6 @@
                     
                     </fieldset> <!--END CATEGORY FIELDSET MENU-->
                 </div>
-                
                 
                 <!-- Populate this ul with the city scores -->
                 <ul id="cityScores">
