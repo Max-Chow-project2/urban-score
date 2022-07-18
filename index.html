@@ -31,6 +31,28 @@
             <section class="userInput">
                 <!-- FORM: Dropdown list to select a city -->
                 <form action="#">
+                    <!-- Continent radio selection -->
+                    <fieldset>
+                        <input type="radio" value="AF" id="africa">
+                        <label for="africa">Africa</label>
+
+                        <input type="radio" value="AS" id="asia">
+                        <label for="asia">Asia</label>
+
+                        <input type="radio" value="EU" id="europe">
+                        <label for="europe">Europe</label>
+
+                        <input type="radio" value="NA" id="north-america">
+                        <label for="north-america">North America</label>
+
+                        <input type="radio" value="OC" id="oceania">
+                        <label for="oceania">Oceania</label>
+                        
+                        <input type="radio" value="SA" id="south-america">
+                        <label for="south-america">South America</label>
+                    </fieldset>
+
+                    <!-- City dropdown selection -->
                     <label for="cities" class="sr-only">Select a city</label>
                     <select name="cities" id="cities" required>
                         <option value selected disabled>Select an option</option>

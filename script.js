@@ -8,6 +8,11 @@ console.log(qualityApp.dropdownElement);
 qualityApp.formElement = document.querySelector('form');
 console.log(qualityApp.formElement);
 
+//event listener for the dropdown continent radio fieldset
+qualityApp.continentListener = () => {
+    const radioElement = document.querySelector('#continent');
+}
+
 // Populate the dropdown list with cities in North America
 qualityApp.createDropdown = () => {
     const url = new URL(`https://api.teleport.org/api/continents/geonames%3ANA/urban_areas/`);
