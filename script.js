@@ -9,7 +9,8 @@ qualityApp.formElement = document.querySelector('form');
 console.log(qualityApp.formElement);
 
 //Getter method for selected continent
-qualityApp.getContinent = () => document.querySelector('input[type=radio]:checked').value;
+qualityApp.getSelectedContinent = () => document.querySelector('input[type=radio]:checked').value;
+
 
 //Event listener for continent radio buttons to update the city list
 qualityApp.continentListener = () => {
@@ -72,6 +73,9 @@ qualityApp.displayCity = () => {
     qualityApp.formElement.addEventListener('change', function(e) {
         e.preventDefault();
 
+        // Get the selected continent's text value to display
+        const selectedContinent = document.querySelector('input[type=radio]:checked + label').innerText;
+
         // Store the selected city name and API url
         const selectedCityName = qualityApp.getCityName();
         const selectedCityHref = qualityApp.getCityHref();
@@ -112,8 +116,10 @@ qualityApp.displayCity = () => {
             const cityScoresArray = cityData.categories;
             const cityDescription = cityData.summary;
             const cityAPIScore = cityData.teleport_city_score;
-            qualityApp.displaySummary(cityAPIScore, cityDescription);
-            qualityApp.displayScores(selectedCityName, cityScoresArray);
+            qualityApp.displaySummary(selectedContinent, selectedCityName, cityAPIScore, cityDescription);
+            qualityApp.displayScores(cityScoresArray);
+            //lock in the first city score
+            qualityApp.lockInCityScore(selectedContinent, selectedCityName, cityAPIScore);
             //city category checkbox
             qualityApp.toggleScoreVisibility();
         })
@@ -136,26 +142,54 @@ qualityApp.displayImage = (cityName, cityImage) => {
     console.log(cityImageElement);
 }
 
-qualityApp.displaySummary = (cityAPIScore, citySummary) => {
+qualityApp.displaySummary = (continentName,cityName, cityAPIScore, citySummary) => {
     const cityAPIScoreElement = document.querySelector('#cityAPIScore');
     const citySummaryElement = document.querySelector('#citySummary');
 
+    // Display city and continent name
+    const cityNameElement = document.querySelector('#cityName');
+    // cityNameElement.innerText = `${cityName} (${continentName})`;
+    cityNameElement.innerHTML = `<h2><button id="lock-in-city">💾</button> ${cityName} (${continentName})</h2>`;
+
     cityAPIScoreElement.textContent = `Overall Score: ${cityAPIScore.toFixed(1)} / 100`;
+
+    //listen for lock in event to save the city
+    const lockCityButtonElement = document.querySelector('#lock-in-city');
+    lockCityButtonElement.addEventListener('click', function() {
+        //unhide the savedCity section on the DOM
+        const savedCitiesSectionElement = document.querySelector('#savedCitiesSection');
+        savedCitiesSectionElement.classList.remove('hidden');
+
+        //select the ul element on the DOM
+        const savedCitiesListElement = document.querySelector('#savedCitiesList');
+
+        //create an li for each city we've saved
+        const savedCity = document.createElement('li');
+        savedCity.innerHTML = `
+
+        `;
+
+        
+
+        // ul class=savedCities
+            // li
+                //div (background image)
+                    //continent
+                    //city
+                    //overall score
+                    //X
+    })
 
     // This is used to strip extra <p> and <b> tags in the citySummary from the API
     citySummaryElement.innerHTML = citySummary;
     citySummaryElement.innerHTML = citySummaryElement.textContent;
+    
 }
 
-qualityApp.displayScores = (cityName, cityScores) => {
-
+qualityApp.displayScores = (cityScores) => {
     //Display category checkbox list
     const categoryContainerElement = document.querySelector('.categoryContainer');
     categoryContainerElement.classList.remove('hidden');
-    
-    // Display city name
-    const cityNameElement = document.querySelector('#cityName');
-    cityNameElement.innerText = cityName;
     
     // Clear the list first
     const cityScoresElement = document.querySelector('#cityScores');
@@ -164,6 +198,7 @@ qualityApp.displayScores = (cityName, cityScores) => {
     // Create and append the score list items
     cityScores.forEach(function (category, index) {
         const listElement = document.createElement('li');
+        listElement.classList.add('category')
         const checkboxElement = document.querySelector(`input[value="${index}"]`);
         
         //if the checkbox category is not checked on load, hide the list item
@@ -180,8 +215,8 @@ qualityApp.displayScores = (cityName, cityScores) => {
 qualityApp.toggleScoreVisibility = () => {
     // target the checkbox elements
     const checkboxElements = document.querySelectorAll('input[type=checkbox]');
-    // target the li elements
-    const listElements = document.querySelectorAll('li');
+    // target the li elements with the class of category
+    const listElements = document.querySelectorAll('.category');
 
     // target the span showing number of hidden scores
     const hiddenScoreCounterElement = document.querySelector('#hiddenScoreCount')
@@ -193,7 +228,7 @@ qualityApp.toggleScoreVisibility = () => {
             hiddenScoreCounter++;
         }
     }
-    hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} scores hidden)`;
+    hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} score(s) hidden)`;
 
     // Hide and show scores and update hidden score counter
     checkboxElements.forEach((checkboxElement, index) => {
@@ -207,15 +242,22 @@ qualityApp.toggleScoreVisibility = () => {
                 listElements[index].classList.add('hidden');
                 hiddenScoreCounter++;
             }
-            hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} scores hidden)`;
+            hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} score(s) hidden)`;
         })
     })
 
 }
 
+qualityApp.lockInCityScore = (selectedContinent, selectedCityName, cityAPIScore) => {
+
+}
+
+
+
+
 qualityApp.init = () => {
     qualityApp.continentListener();
-    qualityApp.createDropdown(qualityApp.getContinent());
+    qualityApp.createDropdown(qualityApp.getSelectedContinent());
     qualityApp.displayCity();
 }
 
