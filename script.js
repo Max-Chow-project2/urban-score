@@ -1,21 +1,35 @@
 const qualityApp = {};
 
-//target the city dropdownElement's value
+//Target the city dropdownElement's value
 qualityApp.dropdownElement = document.querySelector('#cities');
 console.log(qualityApp.dropdownElement);
 
-//target the form
+//Target the form
 qualityApp.formElement = document.querySelector('form');
 console.log(qualityApp.formElement);
 
-//event listener for the dropdown continent radio fieldset
+//Getter method for selected continent
+qualityApp.getContinent = () => document.querySelector('input[type=radio]:checked').value;
+
+//Event listener for continent radio buttons to update the city list
 qualityApp.continentListener = () => {
-    const radioElement = document.querySelector('#continent');
+    const radioElements = document.querySelectorAll('input[type=radio]');
+    
+    radioElements.forEach((radioElement) => {
+        radioElement.addEventListener('change', function () {
+            //Create the dropdown list of cities for the selected continent
+            if (radioElement.checked) {
+                const selectedContinent = radioElement.value;
+                qualityApp.createDropdown(selectedContinent);
+            }
+        })
+
+    })
 }
 
-// Populate the dropdown list with cities in North America
-qualityApp.createDropdown = () => {
-    const url = new URL(`https://api.teleport.org/api/continents/geonames%3ANA/urban_areas/`);
+// Populate the dropdown list with cities in the selected continent
+qualityApp.createDropdown = (continent) => {
+    const url = new URL(`https://api.teleport.org/api/continents/geonames:${continent}/urban_areas/`);
 
     fetch(url)
     .then(function (response) {
@@ -36,6 +50,10 @@ qualityApp.createDropdown = () => {
 
 // Appends options to the dropdown
 qualityApp.populateDropdown = (cityListArray) => {
+    // Clear the city list
+    qualityApp.dropdownElement.innerHTML = '<option value selected disabled>Select an option</option>';
+
+    // Populate the city list
     cityListArray.forEach(function (city) {
         const cityOption = document.createElement('option');
         cityOption.value = city.href;
@@ -49,9 +67,9 @@ qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].inn
 qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
 
 // Get the user's city selection
-qualityApp.getCity = () => {
-    // Listen for user submission
-    qualityApp.formElement.addEventListener('submit', function(e) {
+qualityApp.displayCity = () => {
+    // Listen for city change
+    qualityApp.formElement.addEventListener('change', function(e) {
         e.preventDefault();
 
         // Store the selected city name and API url
@@ -145,11 +163,9 @@ qualityApp.displayScores = (cityName, cityScores) => {
 
     // Create and append the score list items
     cityScores.forEach(function (category, index) {
-
         const listElement = document.createElement('li');
         const checkboxElement = document.querySelector(`input[value="${index}"]`);
         
-
         //if the checkbox category is not checked on load, hide the list item
         if (!checkboxElement.checked) {
             listElement.classList.add('hidden');
@@ -162,32 +178,45 @@ qualityApp.displayScores = (cityName, cityScores) => {
 }
 
 qualityApp.toggleScoreVisibility = () => {
-    //target the checkbox elements
-    const checkboxElements = document.querySelectorAll('input');
-    //target the li elements
+    // target the checkbox elements
+    const checkboxElements = document.querySelectorAll('input[type=checkbox]');
+    // target the li elements
     const listElements = document.querySelectorAll('li');
-    
-    console.log(checkboxElements);
 
+    // target the span showing number of hidden scores
+    const hiddenScoreCounterElement = document.querySelector('#hiddenScoreCount')
+
+    // Count and display count of hidden scores
+    let hiddenScoreCounter = 0;
+    for (let i = 0; i < checkboxElements.length; i++) {
+        if (!checkboxElements[i].checked) {
+            hiddenScoreCounter++;
+        }
+    }
+    hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} scores hidden)`;
+
+    // Hide and show scores and update hidden score counter
     checkboxElements.forEach((checkboxElement, index) => {
         checkboxElement.addEventListener('change', function() {
             //if it's checked, we show the category
             if (checkboxElement.checked) {
                 listElements[index].classList.remove('hidden');
+                hiddenScoreCounter--;
             //if it's not checked we hide the category
             } else {
                 listElements[index].classList.add('hidden');
+                hiddenScoreCounter++;
             }
+            hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} scores hidden)`;
         })
-        
     })
+
 }
 
-
-
 qualityApp.init = () => {
-    qualityApp.createDropdown();
-    qualityApp.getCity();
+    qualityApp.continentListener();
+    qualityApp.createDropdown(qualityApp.getContinent());
+    qualityApp.displayCity();
 }
 
 qualityApp.init();
