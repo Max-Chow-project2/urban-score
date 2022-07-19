@@ -11,6 +11,10 @@ console.log(qualityApp.formElement);
 //Getter method for selected continent
 qualityApp.getSelectedContinent = () => document.querySelector('input[type=radio]:checked').value;
 
+//Counter for saved cities
+qualityApp.savedCityCounter = 0;
+console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
+
 
 //Event listener for continent radio buttons to update the city list
 qualityApp.continentListener = () => {
@@ -119,7 +123,8 @@ qualityApp.displayCity = () => {
             qualityApp.displaySummary(selectedContinent, selectedCityName, cityAPIScore, cityDescription);
             qualityApp.displayScores(cityScoresArray);
             //lock in the first city score
-            qualityApp.lockInCityScore(selectedContinent, selectedCityName, cityAPIScore);
+            qualityApp.manageSavedCities(selectedContinent, selectedCityName, cityAPIScore);
+            
             //city category checkbox
             qualityApp.toggleScoreVisibility();
         })
@@ -152,67 +157,6 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
     cityNameElement.innerHTML = `<h2><button id="lock-in-city">💾</button> ${cityName} (${continentName})</h2>`;
 
     cityAPIScoreElement.textContent = `Overall Score: ${cityAPIScore.toFixed(1)} / 100`;
-
-    //listen for lock in event to save the city
-    const lockCityButtonElement = document.querySelector('#lock-in-city');
-    lockCityButtonElement.addEventListener('click', function() {
- 
-        //unhide the savedCity section on the DOM
-        const savedCitiesSectionElement = document.querySelector('#savedCitiesSection');
-        savedCitiesSectionElement.classList.remove('hidden');
-
-        //select the ul element on the DOM
-        const savedCitiesListElement = document.querySelector('#savedCitiesList');
-
-        //check to see if there's any duplicate city li
-        const userSavedCities = document.querySelectorAll('.savedCity');
-        const userSavedContinent = document.querySelectorAll('.savedContinent');
-
-        let appendCity = true;
-
-        //check each saved city container for duplicates
-        for (i = 0; i < userSavedCities.length; i++) {
-            //if there are duplicates, don't allow it to show up on HTML
-            if (userSavedCities[i].textContent === cityName && userSavedContinent[i].textContent === continentName) {
-                appendCity = false;
-            } 
-        }
-
-        if (appendCity === true) {
-            //add a close button element to each container
-            const buttonElement = document.createElement('button');
-            buttonElement.classList.add('closeSavedCity');
-            buttonElement.innerHTML = `<i class="fa-solid fa-xmark" aria-label="Close"></i>`;
-
-            //add an event listener to each button to listen for clicks for container removal
-            buttonElement.addEventListener('click', function () {
-                this.parentElement.parentElement.removeElement();
-            })
-
-            // create an div for each city we've saved
-            const savedCity = document.createElement('div');
-
-            savedCity.appendChild(buttonElement);
-
-            //scores of saved city inside the container
-            savedCity.innerHTML += `
-            <p class="savedCity">${cityName}</p>
-            <p class="savedContinent">${continentName}</p>
-            <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>`;
-            
-           
-
-            //create an li for each city
-            const savedCityContainer = document.createElement('li');
-   
-            //append the saved city to the li
-            savedCityContainer.append(savedCity);
-
-            //append the li container to the ul
-            savedCitiesListElement.append(savedCityContainer);
-        }
-
-    })
 
     // This is used to strip extra <p> and <b> tags in the citySummary from the API
     citySummaryElement.innerHTML = citySummary;
@@ -282,10 +226,98 @@ qualityApp.toggleScoreVisibility = () => {
 
 }
 
-qualityApp.lockInCityScore = (selectedContinent, selectedCityName, cityAPIScore) => {
+qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
+    //listen for lock in event to save the city
+    const lockCityButtonElement = document.querySelector('#lock-in-city');
 
+    lockCityButtonElement.addEventListener('click', function () {
+
+        //unhide the savedCity section on the DOM
+        const savedCitiesSectionElement = document.querySelector('#savedCitiesSection');
+        savedCitiesSectionElement.classList.remove('hidden');
+
+        //select the ul element on the DOM
+        const savedCitiesListElement = document.querySelector('#savedCitiesList');
+
+        //check to see if there's any duplicate city li
+        const userSavedCities = document.querySelectorAll('.savedCity');
+        const userSavedContinent = document.querySelectorAll('.savedContinent');
+
+        let appendCity = true;
+
+        //local function for checking if there are city containers in the city selection
+        const displayEmptyMsg = () => {
+            //h3 "no cities" msg we're targetting
+            const noCitiesMsgElement = document.querySelector('#savedCitiesSection h3');
+
+            //check if there are no more saved cities
+            if (qualityApp.savedCityCounter === 0) {
+                //show the "no cities" message to user
+                noCitiesMsgElement.classList.remove('hidden');
+            } else {
+                noCitiesMsgElement.classList.add('hidden');
+            }
+        }
+
+
+        //check each saved city container for duplicates
+        for (i = 0; i < userSavedCities.length; i++) {
+            //if there are duplicates, don't allow it to show up on HTML
+            if (userSavedCities[i].textContent === cityName && userSavedContinent[i].textContent === continentName) {
+                appendCity = false;
+            }
+        }
+
+        if (appendCity === true) {
+
+            //add one to the saved city counter for empty message display
+            qualityApp.savedCityCounter++;
+            console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
+
+            //add a close button element to each container
+            const buttonElement = document.createElement('button');
+            buttonElement.classList.add('closeSavedCity');
+            buttonElement.innerHTML = `<i class="fa-solid fa-xmark" aria-label="Close"></i>`;
+
+            // create an div for each city we've saved
+            const savedCity = document.createElement('div');
+
+            //append the close button to the savedCity div
+            savedCity.appendChild(buttonElement);
+
+            //scores of saved city inside the container
+            savedCity.innerHTML += `
+            <p class="savedCity">${cityName}</p>
+            <p class="savedContinent">${continentName}</p>
+            <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>`;
+
+            //create an li for each city
+            const savedCityContainer = document.createElement('li');
+
+            //append the saved city to the li
+            savedCityContainer.append(savedCity);
+
+            //append the li container to the ul
+            savedCitiesListElement.append(savedCityContainer);
+
+            //check for empty saved cities section
+            displayEmptyMsg();
+
+            //event listener for each container's close button
+            const closeButtons = document.querySelectorAll('.closeSavedCity');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    this.parentElement.parentElement.remove();
+
+                    //remove one to the saved city counter for empty message display
+                    qualityApp.savedCityCounter--;
+                    console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
+                    displayEmptyMsg();
+                })
+            })
+        }
+    })
 }
-
 
 
 
@@ -293,6 +325,7 @@ qualityApp.init = () => {
     qualityApp.continentListener();
     qualityApp.createDropdown(qualityApp.getSelectedContinent());
     qualityApp.displayCity();
+
 }
 
 qualityApp.init();
