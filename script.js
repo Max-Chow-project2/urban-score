@@ -164,17 +164,6 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
         //select the ul element on the DOM
         const savedCitiesListElement = document.querySelector('#savedCitiesList');
 
-        //create an li for each city we've saved
-        const savedCity = document.createElement('li');
-        savedCity.innerHTML = `
-        <div>
-            <button id="closeSavedCity">X</button>
-            <p class="savedCity">${cityName}</p>
-            <p class="savedContinent">${continentName}</p>
-            <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>
-        </div>
-        `;
-
         //check to see if there's any duplicate city li
         const userSavedCities = document.querySelectorAll('.savedCity');
         const userSavedContinent = document.querySelectorAll('.savedContinent');
@@ -190,8 +179,37 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
         }
 
         if (appendCity === true) {
-            //append the saved city list item to the ul
-            savedCitiesListElement.append(savedCity);
+            //add a close button element to each container
+            const buttonElement = document.createElement('button');
+            buttonElement.classList.add('closeSavedCity');
+            buttonElement.innerHTML = `<i class="fa-solid fa-xmark" aria-label="Close"></i>`;
+
+            //add an event listener to each button to listen for clicks for container removal
+            buttonElement.addEventListener('click', function () {
+                this.parentElement.parentElement.removeElement();
+            })
+
+            // create an div for each city we've saved
+            const savedCity = document.createElement('div');
+
+            savedCity.appendChild(buttonElement);
+
+            //scores of saved city inside the container
+            savedCity.innerHTML += `
+            <p class="savedCity">${cityName}</p>
+            <p class="savedContinent">${continentName}</p>
+            <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>`;
+            
+           
+
+            //create an li for each city
+            const savedCityContainer = document.createElement('li');
+   
+            //append the saved city to the li
+            savedCityContainer.append(savedCity);
+
+            //append the li container to the ul
+            savedCitiesListElement.append(savedCityContainer);
         }
 
     })
