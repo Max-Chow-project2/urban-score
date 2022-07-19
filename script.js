@@ -70,7 +70,7 @@ qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
 // Get the user's city selection
 qualityApp.displayCity = () => {
     // Listen for city change
-    qualityApp.formElement.addEventListener('change', function(e) {
+    qualityApp.dropdownElement.addEventListener('change', function(e) {
         e.preventDefault();
 
         // Get the selected continent's text value to display
@@ -142,7 +142,7 @@ qualityApp.displayImage = (cityName, cityImage) => {
     console.log(cityImageElement);
 }
 
-qualityApp.displaySummary = (continentName,cityName, cityAPIScore, citySummary) => {
+qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary) => {
     const cityAPIScoreElement = document.querySelector('#cityAPIScore');
     const citySummaryElement = document.querySelector('#citySummary');
 
@@ -156,6 +156,7 @@ qualityApp.displaySummary = (continentName,cityName, cityAPIScore, citySummary) 
     //listen for lock in event to save the city
     const lockCityButtonElement = document.querySelector('#lock-in-city');
     lockCityButtonElement.addEventListener('click', function() {
+ 
         //unhide the savedCity section on the DOM
         const savedCitiesSectionElement = document.querySelector('#savedCitiesSection');
         savedCitiesSectionElement.classList.remove('hidden');
@@ -166,18 +167,33 @@ qualityApp.displaySummary = (continentName,cityName, cityAPIScore, citySummary) 
         //create an li for each city we've saved
         const savedCity = document.createElement('li');
         savedCity.innerHTML = `
-
+        <div>
+            <button id="closeSavedCity">X</button>
+            <p class="savedCity">${cityName}</p>
+            <p class="savedContinent">${continentName}</p>
+            <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>
+        </div>
         `;
 
-        
+        //check to see if there's any duplicate city li
+        const userSavedCities = document.querySelectorAll('.savedCity');
+        const userSavedContinent = document.querySelectorAll('.savedContinent');
 
-        // ul class=savedCities
-            // li
-                //div (background image)
-                    //continent
-                    //city
-                    //overall score
-                    //X
+        let appendCity = true;
+
+        //check each saved city container for duplicates
+        for (i = 0; i < userSavedCities.length; i++) {
+            //if there are duplicates, don't allow it to show up on HTML
+            if (userSavedCities[i].textContent === cityName && userSavedContinent[i].textContent === continentName) {
+                appendCity = false;
+            } 
+        }
+
+        if (appendCity === true) {
+            //append the saved city list item to the ul
+            savedCitiesListElement.append(savedCity);
+        }
+
     })
 
     // This is used to strip extra <p> and <b> tags in the citySummary from the API
