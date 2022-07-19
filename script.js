@@ -13,8 +13,6 @@ qualityApp.getSelectedContinent = () => document.querySelector('input[type=radio
 
 //Counter for saved cities
 qualityApp.savedCityCounter = 0;
-console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
-
 
 //Event listener for continent radio buttons to update the city list
 qualityApp.continentListener = () => {
@@ -227,9 +225,10 @@ qualityApp.toggleScoreVisibility = () => {
 }
 
 qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
-    //listen for lock in event to save the city
+    //selecting the lock-in button
     const lockCityButtonElement = document.querySelector('#lock-in-city');
 
+    //listen for events on the save city lock-in button
     lockCityButtonElement.addEventListener('click', function () {
 
         //unhide the savedCity section on the DOM
@@ -245,7 +244,7 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
         let appendCity = true;
 
-        //local function for checking if there are city containers in the city selection
+        //local function for checking if there are city containers in the saved city section
         const displayEmptyMsg = () => {
             //h3 "no cities" msg we're targetting
             const noCitiesMsgElement = document.querySelector('#savedCitiesSection h3');
@@ -268,11 +267,12 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
             }
         }
 
+        //if there's no duplicates, then append the saved city onto the HTML
         if (appendCity === true) {
 
             //add one to the saved city counter for empty message display
             qualityApp.savedCityCounter++;
-            console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
+            console.log(`COUNTER: ${qualityApp.savedCityCounter}`)
 
             //add a close button element to each container
             const buttonElement = document.createElement('button');
@@ -305,15 +305,20 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
             //event listener for each container's close button
             const closeButtons = document.querySelectorAll('.closeSavedCity');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    this.parentElement.parentElement.remove();
+            closeButtons.forEach((button, index) => {
 
-                    //remove one to the saved city counter for empty message display
-                    qualityApp.savedCityCounter--;
-                    console.log(`OUR COUNTER: ${qualityApp.savedCityCounter}`);
-                    displayEmptyMsg();
-                })
+                //add event listener to the close button without duplicating
+                if (index === qualityApp.savedCityCounter - 1) {
+                    button.addEventListener('click', function () {
+                        this.parentElement.parentElement.remove();
+
+                        //remove one to the saved city counter for empty message display
+                        qualityApp.savedCityCounter--;
+                    
+                        displayEmptyMsg();
+                    })
+                }
+
             })
         }
     })
