@@ -1,18 +1,16 @@
+// Declare namespace object
 const qualityApp = {};
 
 //Target the city dropdownElement's value
 qualityApp.dropdownElement = document.querySelector('#cities');
-console.log(qualityApp.dropdownElement);
-
-//Target the form
-qualityApp.formElement = document.querySelector('form');
-console.log(qualityApp.formElement);
-
-//Getter method for selected continent
-qualityApp.getSelectedContinent = () => document.querySelector('input[type=radio]:checked').value;
 
 //Counter for saved cities
 qualityApp.savedCityCounter = 0;
+
+// Getter Methods for the City, City Href, and Continent
+qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].innerText;
+qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
+qualityApp.getSelectedContinent = () => document.querySelector('input[type=radio]:checked').value;
 
 //Event listener for continent radio buttons to update the city list
 qualityApp.continentListener = () => {
@@ -65,15 +63,10 @@ qualityApp.populateDropdown = (cityListArray) => {
     })
 }
 
-// Getter Methods for the City
-qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].innerText;
-qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
-
-// Get the user's city selection
+// Get the user's city selection and display related data
 qualityApp.displayCity = () => {
     // Listen for city change
-    qualityApp.dropdownElement.addEventListener('change', function(e) {
-        e.preventDefault();
+    qualityApp.dropdownElement.addEventListener('change', function() {
 
         // Get the selected continent's text value to display
         const selectedContinent = document.querySelector('input[type=radio]:checked + label').innerText;
@@ -104,7 +97,7 @@ qualityApp.displayCity = () => {
             alert(error.message);
         })
 
-        // Connect to scores endpoint and display scores
+        // Connect to scores endpoint and display all text for the selected city
         fetch(scoresUrl)
         .then(function (response) {
             if (response.ok) {
@@ -120,10 +113,7 @@ qualityApp.displayCity = () => {
             const cityAPIScore = cityData.teleport_city_score;
             qualityApp.displaySummary(selectedContinent, selectedCityName, cityAPIScore, cityDescription);
             qualityApp.displayScores(cityScoresArray);
-            //lock in the first city score
             qualityApp.manageSavedCities(selectedContinent, selectedCityName, cityAPIScore);
-            
-            //city category checkbox
             qualityApp.toggleScoreVisibility();
         })
         .catch(function(error) {
@@ -134,6 +124,7 @@ qualityApp.displayCity = () => {
     
 }
 
+// Method to show an image from the given city
 qualityApp.displayImage = (cityName, cityImage) => {
     const cityImageElement = document.querySelector('#cityImage');
     cityImageElement.src = ``;
@@ -145,6 +136,7 @@ qualityApp.displayImage = (cityName, cityImage) => {
     console.log(cityImageElement);
 }
 
+// Method to show continent name, city name, overall score, and city summary description
 qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary) => {
     const cityAPIScoreElement = document.querySelector('#cityAPIScore');
     const citySummaryElement = document.querySelector('#citySummary');
@@ -162,6 +154,7 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
     
 }
 
+// Method to show all the category scores
 qualityApp.displayScores = (cityScores) => {
     //Display category checkbox list
     const categoryContainerElement = document.querySelector('.categoryContainer');
@@ -188,12 +181,12 @@ qualityApp.displayScores = (cityScores) => {
     })
 }
 
+//Method to manage category checkbox to show or hide individual scores
 qualityApp.toggleScoreVisibility = () => {
     // target the checkbox elements
     const checkboxElements = document.querySelectorAll('input[type=checkbox]');
     // target the li elements with the class of category
     const listElements = document.querySelectorAll('.category');
-
     // target the span showing number of hidden scores
     const hiddenScoreCounterElement = document.querySelector('#hiddenScoreCount')
 
@@ -204,7 +197,7 @@ qualityApp.toggleScoreVisibility = () => {
             hiddenScoreCounter++;
         }
     }
-    hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} score(s) hidden)`;
+    hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} hidden)`;
 
     // Hide and show scores and update hidden score counter
     checkboxElements.forEach((checkboxElement, index) => {
@@ -218,12 +211,13 @@ qualityApp.toggleScoreVisibility = () => {
                 listElements[index].classList.add('hidden');
                 hiddenScoreCounter++;
             }
-            hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} score(s) hidden)`;
+            hiddenScoreCounterElement.textContent = `(${hiddenScoreCounter} hidden)`;
         })
     })
 
 }
 
+// Method that takes continent, city, and overall score to save or delete individual city data if needed
 qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
     //selecting the lock-in button
     const lockCityButtonElement = document.querySelector('#lock-in-city');
@@ -242,6 +236,7 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
         const userSavedCities = document.querySelectorAll('.savedCity');
         const userSavedContinent = document.querySelectorAll('.savedContinent');
 
+        // flag to determine if you should be able to save the city
         let appendCity = true;
 
         //local function for checking if there are city containers in the saved city section
@@ -257,7 +252,6 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
                 noCitiesMsgElement.classList.add('hidden');
             }
         }
-
 
         //check each saved city container for duplicates
         for (i = 0; i < userSavedCities.length; i++) {
@@ -324,13 +318,40 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
     })
 }
 
+// Method to add accordion functionality to accordion-button and accordion-container
+qualityApp.addAccordionListener = () => {
+    // Target the button for accordion feature
+    const accordionButton = document.querySelector('.accordion-button');
 
+    // Reused code from Max's Assignment 2
+    accordionButton.addEventListener('click', function (event) {
+        // Toggle Arrow Icon on Click
+        this.firstElementChild.classList.toggle('fa-angle-down');
+        this.firstElementChild.classList.toggle('fa-angle-right');
 
+        // Selecting the Accordion Container Element
+        const accordionContainerEl = this.parentElement.lastElementChild;
+
+        // Toggle Visibility Class (tracks visibility of container)
+        accordionContainerEl.classList.toggle('accordion-container-visible');
+
+        // Adjust max-height depending on visibility
+        if (accordionContainerEl.classList.contains("accordion-container-visible")) {
+            // Give accordion-container height of its content
+            accordionContainerEl.style.maxHeight = accordionContainerEl.scrollHeight + "px";
+        } else {
+            // Remove accordion-container's height
+            accordionContainerEl.style.maxHeight = 0 + "px"
+        }
+    })
+}
+
+// Init
 qualityApp.init = () => {
     qualityApp.continentListener();
     qualityApp.createDropdown(qualityApp.getSelectedContinent());
     qualityApp.displayCity();
-
+    qualityApp.addAccordionListener();
 }
 
 qualityApp.init();
