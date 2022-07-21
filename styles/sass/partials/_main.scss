@@ -1,0 +1,11 @@
+main {
+    .results {
+        @include flexCol;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        display: block;
+    }
+}

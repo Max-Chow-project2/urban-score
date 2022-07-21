@@ -147,7 +147,7 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
 
     // Display city and continent name
     const cityNameElement = document.querySelector('#cityName');
-    // cityNameElement.innerText = `${cityName} (${continentName})`;
+    
     cityNameElement.innerHTML = `<h2>${cityName} (${continentName})</h2>`;
 
     cityAPIScoreElement.textContent = `Overall Score: ${cityAPIScore.toFixed(1)} / 100`;

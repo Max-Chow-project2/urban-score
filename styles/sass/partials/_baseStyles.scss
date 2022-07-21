@@ -1,3 +1,11 @@
+//transition styling
+* {
+    transition-property: filter, max-height, width;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+
+}
+
 body {
     background-color: $themeWhite;
 }
@@ -28,4 +36,20 @@ img {
 fieldset {
     border: none;
     padding: 0;
+}
+
+button {
+    border: none;
+    font-size: 4rem;
+    background-color: $themeYellow;
+    padding: 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-family: $headerFont;
+
+    &:hover,
+    :focus {
+        cursor: pointer;
+        filter: brightness(80%);
+    }
 }
