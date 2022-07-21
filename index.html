@@ -4,21 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Quality of Life</title>
+    <title>Urban Score</title>
 
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="./styles/style.css">
 
     <!-- FONTAWESOME -->
     <script src="https://kit.fontawesome.com/acf2ac11d5.js" crossorigin="anonymous"></script>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600&family=Montserrat:wght@800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <!-- ABOUT SECTION -->
     <header>
         <div class="wrapper">
-            <h1>Urban Quality of Life</h1>
-            <p>First select a continent. Next, select city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+            <!-- header info section -->
+            <div class="headerInfoContainer">
+                <!-- header img container -->
+                <div class="headerImageContainer">
+                    <img src="./images/header-image.png" alt="3D image illustration of a observatory in a forest">
+                </div> <!-- END header image container-->
+                
+                <!-- header text container -->
+                <div class="headerTextContainer">
+                    <!-- Font awesome icons -->
+                    <div class="decorativeIcons">
+                        <i class="fa-solid fa-house-chimney" aria-hidden="true"></i>
+                        <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+                        <i class="fa-solid fa-bus-simple" aria-hidden="true"></i>
+                        <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                        <i class="fa-solid fa-masks-theater" aria-hidden="true"></i>
+                        <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                        
+                    </div> <!--END font awesome icons -->
+
+                    <h1>Urban Score</h1>
+                    <p>First select a continent. Next, select city from the drop-down list to see quality of life scores for a multitude of factors, such as Housing, Cost of Living, and Safety.</p>
+                </div> <!-- END header text container-->
+                
+            </div> <!--END headerInfoContainer -->
+            
+
+            <div class="userInput">
+                <h3> 1. Pick a continent </h3>
+ 
+                <!-- Continent radio selection -->
+                <fieldset class="continentRadioField">
+                    <input type="radio" value="AF" id="africa" name="continent" checked>
+                    <label for="africa">Africa</label>
+        
+                    <input type="radio" value="AS" id="asia" name="continent">
+                    <label for="asia">Asia</label>
+        
+                    <input type="radio" value="EU" id="europe" name="continent">
+                    <label for="europe">Europe</label>
+        
+                    <input type="radio" value="NA" id="north-america" name="continent">
+                    <label for="north-america">North America</label>
+        
+                    <input type="radio" value="OC" id="oceania" name="continent">
+                    <label for="oceania">Oceania</label>
+        
+                    <input type="radio" value="SA" id="south-america" name="continent">
+                    <label for="south-america">South America</label>
+                </fieldset>
+        
+                <!-- City dropdown selection -->
+                <h3> 2. Select a city </h3>
+                <label for="cities" class="sr-only">Select a city</label>
+                <select name="cities" id="cities" required>
+                    <option value selected disabled>Select an option</option>
+                </select>
+              
+            
+            </div>
+            <!--END USER INPUT SECTION -->
         </div>
         
     </header>
@@ -26,44 +91,15 @@
     <!-- MAIN SECTION -->
     <main>
 
-        <div class="wrapper">
-
-            <section class="userInput">
-                <!-- FORM: Dropdown list to select a city -->
-                <form action="#">
-                    <!-- Continent radio selection -->
-                    <fieldset>
-                        <input type="radio" value="AF" id="africa" name="continent" checked>
-                        <label for="africa">Africa</label>
-
-                        <input type="radio" value="AS" id="asia" name="continent">
-                        <label for="asia">Asia</label>
-
-                        <input type="radio" value="EU" id="europe" name="continent">
-                        <label for="europe">Europe</label>
-
-                        <input type="radio" value="NA" id="north-america" name="continent">
-                        <label for="north-america">North America</label>
-
-                        <input type="radio" value="OC" id="oceania" name="continent">
-                        <label for="oceania">Oceania</label>
-                        
-                        <input type="radio" value="SA" id="south-america" name="continent">
-                        <label for="south-america">South America</label>
-                    </fieldset>
-
-                    <!-- City dropdown selection -->
-                    <label for="cities" class="sr-only">Select a city</label>
-                    <select name="cities" id="cities" required>
-                        <option value selected disabled>Select an option</option>
-                    </select>
-                </form>
-
-            </section> <!--END USER INPUT SECTION -->
-            
+        <div class="wrapper">  
     
             <!-- API RESULTS SECTION -->
             <section class="results">
+                <!-- save button to save the city -->
+                <button id="lock-in-city" class="hidden">
+                    <i class="fa-solid fa-floppy-disk" aria-label="Save city"></i>
+                </button>
+
                 <!-- Place the city name in this <h2> -->
                 <h2 id="cityName"></h2>
                 
@@ -171,6 +207,7 @@
                     </fieldset> <!--END CATEGORY FIELDSET MENU-->
                 </div>
                 
+
                 <!-- Populate this ul with the city scores -->
                 <ul id="cityScores">
                     
@@ -191,6 +228,21 @@
         </div> <!-- END WRAPPER -->
 
     </main> <!-- END MAIN -->
+
+    <footer>
+        <div class="wrapper">
+            <p>
+                <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
+                Made by <a href="#">Max L.</a> 
+                & 
+                <a href="#">Chow C.</a> 
+                with the 
+                <a href="https://developers.teleport.org/api/">Teleport API</a>
+                <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
+            </p>
+        </div>
+        
+    </footer>
 
     <!-- JAVASCRIPT -->
     <script src="./script.js"></script>
