@@ -42,14 +42,15 @@ button {
     border: none;
     font-size: 4rem;
     background-color: $themeYellow;
-    padding: 10px;
+    padding: 10px 30px;
     border-radius: 10px;
     text-transform: uppercase;
     font-family: $headerFont;
+    margin: 10px 0;
 
     &:hover,
     :focus {
         cursor: pointer;
-        filter: brightness(80%);
+        filter: brightness(1.25);
     }
 }
