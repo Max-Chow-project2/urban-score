@@ -488,6 +488,8 @@ main li {
 }
 
 footer {
+  position: fixed;
+  bottom: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -498,8 +500,10 @@ footer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 50px;
+  width: 100%;
   margin-top: 24px;
+  padding: 12px 0;
+  text-align: center;
   color: #FBFAFA;
   background-color: #1A1A1A;
 }
