@@ -1,5 +1,5 @@
 html {
-    font-size: 62.5%;
+    font-size: 125%;
     color: $themeBlack;
 }
 
@@ -11,20 +11,21 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 6.4rem;
+    // font-size: 6.4rem;
+    font-size: clamp(2.125rem, calc(12px + 2.750vw), 2.875rem);
     text-align: left;
 }
 
 h2 {
-    font-size: 4.0rem;
+    font-size: clamp(1.750rem, calc(12px + 2.000vw), 2.250rem);
 }
 
 h3 {
-    font-size: 3.8rem;
+    font-size: clamp(1.425rem, calc(12px + 1.500vw), 1.875rem);
 }
 
 h4 {
-    font-size: 3.2rem;
+    font-size: clamp(1.250rem, calc(12px + 1.000vw), 1.500rem);
     text-transform: capitalize;
 }
 
@@ -41,6 +42,6 @@ p,
 label,
 select {
     font-family: $bodyFont;
-    font-size: 2.4rem;
+    font-size: clamp(1.150rem, calc(12px + 0.600vw), 1.250rem);
     margin: 0;
 }

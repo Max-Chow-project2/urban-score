@@ -1,0 +1,71 @@
+//1000, 800, 500, min 320px
+@media only screen and (max-width: 1000px) {
+    //header section
+    h1 {
+        text-align: center;
+    }
+
+    .headerInfoContainer {
+        flex-direction: column;
+        align-items: center;
+
+        .headerImageContainer {
+            display: flex;
+            justify-items: center;
+            align-content: center;
+        }
+
+        .headerTextContainer {
+            align-items: center;
+
+            & > p:nth-child(3) {
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    header {
+        padding-top: 100px;
+    }
+
+    .accordion-container {
+        flex-direction: column;
+    }
+
+    .checkboxContainer {
+        padding: 0;
+        margin: 20px 50px;
+
+        &:first-child {
+            margin-bottom: 0;
+        }
+
+        &:last-child {
+            margin-top: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .wrapper {
+        width: 95%;
+    }
+
+    .categoryContainer {
+        width: 100%;
+    }
+
+    .checkboxContainer {
+        margin: 20px;
+    }
+
+    .decorativeIcons {
+        display: none;
+    }
+
+    .headerInfoContainer .headerTextContainer {
+        width: 100%;
+    }
+}

@@ -236,10 +236,10 @@ html {
 }
 
 * {
-  -webkit-transition-property: max-height, width, -webkit-filter;
-  transition-property: max-height, width, -webkit-filter;
-  transition-property: filter, max-height, width;
-  transition-property: filter, max-height, width, -webkit-filter;
+  -webkit-transition-property: max-height, width, border, color, background-color, -webkit-filter;
+  transition-property: max-height, width, border, color, background-color, -webkit-filter;
+  transition-property: filter, max-height, width, border, color, background-color;
+  transition-property: filter, max-height, width, border, color, background-color, -webkit-filter;
   -webkit-transition-duration: 0.4s;
           transition-duration: 0.4s;
   -webkit-transition-timing-function: ease-in-out;
@@ -281,11 +281,10 @@ fieldset {
 
 button {
   border: none;
-  font-size: 4rem;
+  font-size: 1.5rem;
   background-color: #FCBA43;
   padding: 10px 30px;
   border-radius: 10px;
-  text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
 }
 button:hover,
@@ -296,7 +295,7 @@ button :focus {
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 125%;
   color: #1A1A1A;
 }
 
@@ -308,20 +307,20 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 6.4rem;
+  font-size: clamp(2.125rem, 12px + 2.75vw, 2.875rem);
   text-align: left;
 }
 
 h2 {
-  font-size: 4rem;
+  font-size: clamp(1.75rem, 12px + 2vw, 2.25rem);
 }
 
 h3 {
-  font-size: 3.8rem;
+  font-size: clamp(1.425rem, 12px + 1.5vw, 1.875rem);
 }
 
 h4 {
-  font-size: 3.2rem;
+  font-size: clamp(1.25rem, 12px + 1vw, 1.5rem);
   text-transform: capitalize;
 }
 
@@ -338,7 +337,7 @@ p,
 label,
 select {
   font-family: "Hind", sans-serif;
-  font-size: 2.4rem;
+  font-size: clamp(1.15rem, 12px + 0.6vw, 1.25rem);
   margin: 0;
 }
 
@@ -361,6 +360,8 @@ header fieldset {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -403,7 +404,7 @@ header fieldset {
           align-items: center;
 }
 .decorativeIcons i {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   background-color: #20A36F;
   color: #FBFAFA;
   padding: 10px;
@@ -429,13 +430,43 @@ header fieldset {
   margin-left: 10px;
 }
 
-input[type=radio], input[type=checkbox] {
+.userInput h3:first-child {
+  margin-bottom: 15px;
+}
+
+.radioContainer input[type=radio] {
+  opacity: 0;
+  position: absolute;
+}
+.radioContainer label {
+  border: 2px solid #1A1A1A;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+}
+.radioContainer label:hover {
+  cursor: pointer;
+}
+.radioContainer input:checked + label {
+  border: 2px solid #20A36F;
+  background-color: #20A36F;
+  color: #FBFAFA;
+}
+
+input[type=checkbox] {
   margin-right: 10px;
   -webkit-transform: scale(1.25);
           transform: scale(1.25);
 }
-input[type=radio]:not(:first-child), input[type=checkbox]:not(:first-child) {
+input[type=checkbox]:not(:first-child) {
   margin-left: 30px;
+}
+
+.radioContainer {
+  margin-right: 20px;
+}
+.radioContainer:last-child {
+  margin-right: 0;
 }
 
 select {
@@ -479,9 +510,10 @@ main .results ul {
 }
 main .results > h3 {
   color: #2989F7;
+  margin-bottom: 24px;
 }
 main img {
-  margin: 24px;
+  margin: 24px 0;
 }
 main li {
   margin: 12px 0;
@@ -544,7 +576,7 @@ footer .wrapper {
 
 .accordion-container {
   overflow: hidden;
-  max-height: 300px;
+  max-height: 1000vh;
   background-color: #FFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -569,13 +601,13 @@ footer .wrapper {
 
 .full-bar {
   width: 100%;
-  height: 40px;
+  height: 25px;
   background-color: #ddd;
   border-radius: 50px;
 }
 
 .percentage-bar {
-  height: 4rem;
+  height: 25px;
   border-radius: 50px;
   z-index: 10;
 }
@@ -593,6 +625,9 @@ footer .wrapper {
           align-items: center;
   margin-bottom: 100px;
 }
+.savedCitiesSections h2 {
+  margin-bottom: 24px;
+}
 .savedCitiesSections ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -601,13 +636,13 @@ footer .wrapper {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  gap: 12px;
-  width: 984px;
+  gap: 20px;
+  width: 90%;
 }
 .savedCitiesSections li {
   position: relative;
@@ -638,18 +673,84 @@ footer .wrapper {
   margin: 0;
   width: 42px;
   height: 42px;
-  font-size: 3.6rem;
+  font-size: 1.8rem;
 }
 .savedCitiesSections p {
   text-align: center;
 }
 .savedCitiesSections p.savedCity {
-  font-size: 2.8rem;
+  font-size: 1.4rem;
   font-weight: bold;
 }
-.savedCitiesSections p.savedContinent {
-  font-size: 2.8rem;
+.savedCitiesSections p.savedContinent, .savedCitiesSections p.savedScore {
+  font-size: 1.2rem;
 }
-.savedCitiesSections p.savedScore {
-  font-size: 2.4rem;
+
+@media only screen and (max-width: 1000px) {
+  h1 {
+    text-align: center;
+  }
+  .headerInfoContainer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .headerInfoContainer .headerImageContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-items: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+  }
+  .headerInfoContainer .headerTextContainer {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .headerInfoContainer .headerTextContainer > p:nth-child(3) {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 850px) {
+  header {
+    padding-top: 100px;
+  }
+  .accordion-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .checkboxContainer {
+    padding: 0;
+    margin: 20px 50px;
+  }
+  .checkboxContainer:first-child {
+    margin-bottom: 0;
+  }
+  .checkboxContainer:last-child {
+    margin-top: 0;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .wrapper {
+    width: 95%;
+  }
+  .categoryContainer {
+    width: 100%;
+  }
+  .checkboxContainer {
+    margin: 20px;
+  }
+  .decorativeIcons {
+    display: none;
+  }
+  .headerInfoContainer .headerTextContainer {
+    width: 100%;
+  }
 }

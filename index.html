@@ -55,23 +55,35 @@
 
                 <!-- Continent radio selection -->
                 <fieldset class="continentRadioField">
-                    <input type="radio" value="AF" id="africa" name="continent" checked>
-                    <label for="africa">Africa</label>
-        
-                    <input type="radio" value="AS" id="asia" name="continent">
-                    <label for="asia">Asia</label>
-        
-                    <input type="radio" value="EU" id="europe" name="continent">
-                    <label for="europe">Europe</label>
-        
-                    <input type="radio" value="NA" id="north-america" name="continent">
-                    <label for="north-america">North America</label>
-        
-                    <input type="radio" value="OC" id="oceania" name="continent">
-                    <label for="oceania">Oceania</label>
-        
-                    <input type="radio" value="SA" id="south-america" name="continent">
-                    <label for="south-america">South America</label>
+                    <div class="radioContainer">
+                        <input type="radio" value="AF" id="africa" name="continent" checked>
+                        <label for="africa" tabindex="0">Africa</label>
+                    </div>
+                    
+                    <div class="radioContainer">
+                        <input type="radio" value="AS" id="asia" name="continent">
+                        <label for="asia" tabindex="0">Asia</label>
+                    </div>                       
+                    
+                    <div class="radioContainer">
+                        <input type="radio" value="EU" id="europe" name="continent">
+                        <label for="europe" tabindex="0">Europe</label>
+                    </div>                   
+                    
+                    <div class="radioContainer">
+                        <input type="radio" value="NA" id="north-america" name="continent">
+                        <label for="north-america" tabindex="0">North America</label>
+                    </div>
+                   
+                    <div class="radioContainer">
+                        <input type="radio" value="OC" id="oceania" name="continent">
+                        <label for="oceania" tabindex="0">Oceania</label>
+                    </div>
+                    
+                    <div class="radioContainer">
+                        <input type="radio" value="SA" id="south-america" name="continent">
+                        <label for="south-america" tabindex="0">South America</label>
+                    </div>
                 </fieldset>
         
                 <!-- City dropdown selection -->
@@ -116,7 +128,7 @@
                 <!-- Dropdown list of categories to change visbility-->
                 <!-- Checkboxes to add/remove score categories -->
                 <div class="categoryContainer hidden">
-                    <h3 class="legend accordion-button"  tabindex="0"><i class="fa-solid fa-angle-down" aria-hidden="true"></i> Show or hide scores <span id="hiddenScoreCount"></span>
+                    <h3 class="legend accordion-button" tabindex="0"><i class="fa-solid fa-angle-down" aria-hidden="true"></i> Show or hide scores <span id="hiddenScoreCount"></span>
                     </h3>
                     
                     <fieldset class="accordion-container accordion-container-visible">

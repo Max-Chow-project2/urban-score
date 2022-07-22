@@ -12,11 +12,12 @@ main {
 
         & > h3 {
             color: $themeBlue;
+            margin-bottom: 24px;
         }
     }  
 
     img {
-        margin: 24px;
+        margin: 24px 0;
     }
 
     li {

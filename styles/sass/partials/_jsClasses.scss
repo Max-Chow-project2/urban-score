@@ -24,7 +24,7 @@
 
 .accordion-container {
     overflow: hidden;
-    max-height: 300px;
+    max-height: 1000vh;
 
     background-color: $solidWhite;
 
@@ -41,15 +41,13 @@
 // Bars for each score
 .full-bar {
     width: 100%;
-    height: 40px;
+    height: 25px;
     background-color: #ddd;
     border-radius: 50px;
 }
 
 .percentage-bar {
-    // width: 50%; //will be dynamic
-    height: 4rem;
-    // background-color: #04AA6D; //will be dynamic
+    height: 25px;
     border-radius: 50px;
     z-index: 10;
 }
@@ -60,13 +58,16 @@
     align-items: center;
     margin-bottom: 100px;
 
+    h2 {
+        margin-bottom: 24px;
+    }
+
     ul {
         @include flexRow;
-        justify-content: flex-start;
+        justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
-    
-        width: 984px;
+        gap: 20px;
+        width: 90%;
     }
 
     li {
@@ -93,20 +94,18 @@
 
         width: 42px;
         height: 42px;
-        font-size: 3.6rem;
+        font-size: 1.8rem;
     }
 
     p {
         text-align: center;
         &.savedCity {
-            font-size: 2.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
         }
-        &.savedContinent {
-            font-size: 2.8rem;
-        }
+        &.savedContinent,
         &.savedScore {
-            font-size: 2.4rem;
+            font-size: 1.2rem;
         }
     }
 }
