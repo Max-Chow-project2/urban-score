@@ -240,10 +240,6 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
     //listen for events on the save city lock-in button
     lockCityButtonElement.addEventListener('click', function () {
 
-        //unhide the savedCity section on the DOM
-        const savedCitiesSectionElement = document.querySelector('#savedCitiesSection');
-        savedCitiesSectionElement.classList.remove('hidden');
-
         //select the ul element on the DOM
         const savedCitiesListElement = document.querySelector('#savedCitiesList');
 
@@ -257,7 +253,10 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
         //local function for checking if there are city containers in the saved city section
         const displayEmptyMsg = () => {
             //h3 "no cities" msg we're targetting
+            const savedCitiesTitleElement = document.querySelector('#savedCitiesSection h2');
             const noCitiesMsgElement = document.querySelector('#savedCitiesSection h3');
+
+            savedCitiesTitleElement.classList.remove('hidden');
 
             //check if there are no more saved cities
             if (qualityApp.savedCityCounter === 0) {
@@ -311,6 +310,7 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
             //check for empty saved cities section
             displayEmptyMsg();
+            console.log('should display')
 
             //event listener for each container's close button
             const closeButtons = document.querySelectorAll('.closeSavedCity');
@@ -323,7 +323,7 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
                         //remove one to the saved city counter for empty message display
                         qualityApp.savedCityCounter--;
-                    
+
                         displayEmptyMsg();
                     })
                 }

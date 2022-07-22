@@ -53,3 +53,60 @@
     border-radius: 50px;
     z-index: 10;
 }
+
+// Saved City Cards
+.savedCitiesSections {
+    @include flexCol;
+    align-items: center;
+    margin-bottom: 100px;
+
+    ul {
+        @include flexRow;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    
+        width: 984px;
+    }
+
+    li {
+        position: relative;
+        height: 200px; 
+        width: 320px;
+        margin: 0;
+
+        border: 2px solid $themeBlack;
+        border-radius: 10px;
+
+        @include flexCol;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        padding: 0;
+        margin: 0;
+
+        width: 42px;
+        height: 42px;
+        font-size: 3.6rem;
+    }
+
+    p {
+        text-align: center;
+        &.savedCity {
+            font-size: 2.8rem;
+            font-weight: bold;
+        }
+        &.savedContinent {
+            font-size: 2.8rem;
+        }
+        &.savedScore {
+            font-size: 2.4rem;
+        }
+    }
+}

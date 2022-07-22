@@ -1,0 +1,21 @@
+footer {
+    position: fixed;
+    bottom: 0px;
+
+    @include flexCol;
+    justify-content: center;
+
+    width: 100%;
+    padding: 12px 0;
+
+    text-align: center;
+
+    color: $themeWhite;
+    background-color: $themeBlack;
+
+    .wrapper {
+        @include flexCol;
+        justify-content: center;
+        align-items: center;
+    }
+}
