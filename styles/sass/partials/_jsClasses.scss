@@ -58,6 +58,7 @@
 .savedCitiesSections {
     @include flexCol;
     align-items: center;
+    margin-bottom: 100px;
 
     ul {
         @include flexRow;

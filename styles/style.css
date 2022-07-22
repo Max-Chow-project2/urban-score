@@ -501,7 +501,6 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
-  margin-top: 24px;
   padding: 12px 0;
   text-align: center;
   color: #FBFAFA;
@@ -592,6 +591,7 @@ footer .wrapper {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 100px;
 }
 .savedCitiesSections ul {
   display: -webkit-box;
