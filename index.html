@@ -52,7 +52,7 @@
 
             <div class="userInput">
                 <h3> 1. Pick a continent </h3>
- 
+
                 <!-- Continent radio selection -->
                 <fieldset class="continentRadioField">
                     <input type="radio" value="AF" id="africa" name="continent" checked>
@@ -80,7 +80,7 @@
                 <select name="cities" id="cities" required>
                     <option value selected disabled>Select an option</option>
                 </select>
-              
+            
             
             </div>
             <!--END USER INPUT SECTION -->
@@ -99,13 +99,13 @@
                 <!-- Place the city name in this <h2> -->
                 <h2 id="cityName"></h2>
                 
-                <!-- save button to save the city -->
+                <!-- Place the city's overall score from the API -->
+                <h3 id="cityAPIScore"></h3>
+
+                <!-- Button to save the city -->
                 <button id="lock-in-city" class="hidden">
                     <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save this City
                 </button>
-                
-                <!-- Place the city's overall score from the API -->
-                <h3 id="cityAPIScore"></h3>
                 
                 <!-- Place image of the city in this element -->
                 <img src="" alt="" id="cityImage">
@@ -116,93 +116,97 @@
                 <!-- Dropdown list of categories to change visbility-->
                 <!-- Checkboxes to add/remove score categories -->
                 <div class="categoryContainer hidden">
-                    <h3 class="legend accordion-button"  tabindex="0"><i class="fa-solid fa-angle-down" aria-hidden="true"></i> Alter the categories you want to see <span id="hiddenScoreCount"></span>
+                    <h3 class="legend accordion-button"  tabindex="0"><i class="fa-solid fa-angle-down" aria-hidden="true"></i> Show or hide scores <span id="hiddenScoreCount"></span>
                     </h3>
                     
                     <fieldset class="accordion-container accordion-container-visible">
                         <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="housing" value="0" checked>
-                            <label for="housing">Housing</label>
+                            <div>
+                                <input type="checkbox" name="category" id="housing" value="0" checked>
+                                <label for="housing">Housing</label>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" name="category" id="cost-of-living" value="1" checked>
+                                <label for="cost-of-living">Cost of Living</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="startups" value="2" checked>
+                                <label for="startups">Startups</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="venture-capital" value="3" checked>
+                                <label for="venture-capital">Venture Capital</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="travel-connectivity" value="4" checked>
+                                <label for="travel-connectivity">Travel Connectivity</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="commute" value="5" checked>
+                                <label for="commute">Commute</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="business-freedom" value="6" checked>
+                                <label for="business-freedom">Business Freedom</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="safety" value="7" checked>
+                                <label for="safety">Safety</label>
+                            </div>
+                            
+                            <div>
+                                <input type="checkbox" name="category" id="healthcare" value="8" checked>
+                                <label for="healthcare">Healthcare</label>
+                            </div>
                         </div>
                     
                         <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="cost-of-living" value="1" checked>
-                            <label for="cost-of-living">Cost of Living</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="startups" value="2" checked>
-                            <label for="startups">Startups</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="venture-capital" value="3" checked>
-                            <label for="venture-capital">Venture Capital</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="travel-connectivity" value="4" checked>
-                            <label for="travel-connectivity">Travel Connectivity</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="commute" value="5" checked>
-                            <label for="commute">Commute</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="business-freedom" value="6" checked>
-                            <label for="business-freedom">Business Freedom</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="safety" value="7" checked>
-                            <label for="safety">Safety</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="healthcare" value="8" checked>
-                            <label for="healthcare">Healthcare</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="education" value="9" checked>
-                            <label for="education">Education</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="environmental-quality" value="10" checked>
-                            <label for="environmental-quality">Environmental Quality</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="economy" value="11" checked>
-                            <label for="economy">Economy</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="taxation" value="12" checked>
-                            <label for="taxation">Taxation</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="internet-access" value="13" checked>
-                            <label for="internet-access">Internet Access</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="leisure-and-culture" value="14" checked>
-                            <label for="leisure-and-culture">Leisure & Culture</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="tolerance" value="15" checked>
-                            <label for="tolerance">Tolerance</label>
-                        </div>
-                    
-                        <div class="checkboxContainer">
-                            <input type="checkbox" name="category" id="outdoors" value="16" checked>
-                            <label for="outdoors">Outdoors</label>
+                            <div>
+                                <input type="checkbox" name="category" id="education" value="9" checked>
+                                <label for="education">Education</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="environmental-quality" value="10" checked>
+                                <label for="environmental-quality">Environmental Quality</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="economy" value="11" checked>
+                                <label for="economy">Economy</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="taxation" value="12" checked>
+                                <label for="taxation">Taxation</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="internet-access" value="13" checked>
+                                <label for="internet-access">Internet Access</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="leisure-and-culture" value="14" checked>
+                                <label for="leisure-and-culture">Leisure & Culture</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="tolerance" value="15" checked>
+                                <label for="tolerance">Tolerance</label>
+                            </div>
+                        
+                            <div>
+                                <input type="checkbox" name="category" id="outdoors" value="16" checked>
+                                <label for="outdoors">Outdoors</label>
+                            </div>
                         </div>
                     
                     </fieldset> <!--END CATEGORY FIELDSET MENU-->

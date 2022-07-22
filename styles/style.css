@@ -256,6 +256,7 @@ a,
 input {
   margin: 0;
   padding: 0;
+  accent-color: #20A36F;
 }
 
 ul {
@@ -308,16 +309,21 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 9rem;
+  font-size: 6.4rem;
   text-align: left;
 }
 
 h2 {
-  font-size: 6.4rem;
+  font-size: 4rem;
 }
 
 h3 {
-  font-size: 4.8rem;
+  font-size: 3.8rem;
+}
+
+h4 {
+  font-size: 3.2rem;
+  text-transform: capitalize;
 }
 
 a {
@@ -325,11 +331,15 @@ a {
   color: #20A36F;
 }
 
+.score {
+  font-family: "Hind", sans-serif;
+}
+
 p,
 label,
 select {
   font-family: "Hind", sans-serif;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   margin: 0;
 }
 
@@ -420,12 +430,12 @@ header fieldset {
   margin-left: 10px;
 }
 
-input[type=radio] {
+input[type=radio], input[type=checkbox] {
   margin-right: 10px;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
 }
-input[type=radio]:not(:first-child) {
+input[type=radio]:not(:first-child), input[type=checkbox]:not(:first-child) {
   margin-left: 30px;
 }
 
@@ -464,6 +474,18 @@ main .results {
       -ms-flex-align: center;
           align-items: center;
 }
+main .results > h3 {
+  color: #2989F7;
+}
+main img {
+  margin: 24px;
+}
+main ul {
+  width: 85%;
+}
+main li {
+  margin: 12px 0;
+}
 
 .hidden {
   display: none;
@@ -472,12 +494,53 @@ main .results {
 .accordion-button {
   display: block;
   width: 100%;
+  padding: 12px;
+  text-transform: none;
+  background-color: #FCBA43;
 }
 .accordion-button:hover {
   cursor: pointer;
 }
 
+.categoryContainer {
+  width: 75%;
+  margin: 24px 0;
+}
+
 .accordion-container {
   overflow: hidden;
-  max-height: none;
+  max-height: 300px;
+  background-color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.checkboxContainer {
+  -ms-flex-preferred-size: 45%;
+      flex-basis: 45%;
+  padding: 12px 0;
+}
+
+.full-bar {
+  width: 100%;
+  height: 40px;
+  background-color: #ddd;
+  border-radius: 50px;
+}
+
+.percentage-bar {
+  height: 4rem;
+  border-radius: 50px;
+  z-index: 10;
 }

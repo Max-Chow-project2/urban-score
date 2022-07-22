@@ -179,8 +179,19 @@ qualityApp.displayScores = (cityScores) => {
             listElement.classList.add('hidden');
         }
 
-        listElement.innerHTML = `<h4>${category.name}: </h4><p class="score">${category.score_out_of_10.toFixed(1)}/10</p>`;
+        listElement.innerHTML = `<h4>${category.name}: <span class="score">${category.score_out_of_10.toFixed(1)}/10</span></h4>`;
 
+        // Build and append the coloured score bars
+        const fullBarElement = document.createElement('div');
+        fullBarElement.classList.add('full-bar');
+
+        const percentageBarElement = document.createElement('div');
+        percentageBarElement.classList.add('percentage-bar');
+        percentageBarElement.style.backgroundColor = category.color;
+        percentageBarElement.style.width = category.score_out_of_10 * 10 + "%";
+
+        fullBarElement.append(percentageBarElement)
+        listElement.append(fullBarElement);
         cityScoresElement.append(listElement);
     })
 }

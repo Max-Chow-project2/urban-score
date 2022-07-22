@@ -3,6 +3,25 @@ main {
         @include flexCol;
         justify-content: center;
         align-items: center;
+
+        & > h3 {
+            color: $themeBlue;
+        }
     }  
+
+    img {
+        margin: 24px;
+    }
+
+    ul {
+        width: 85%;
+    }
+
+    li {
+        margin: 12px 0;
+    }
 }
+
+
+
 
