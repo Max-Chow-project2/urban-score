@@ -287,7 +287,6 @@ button {
   border-radius: 10px;
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
-  margin: 10px 0;
 }
 button:hover,
 button :focus {
@@ -460,6 +459,7 @@ option:hover {
 }
 
 main .results {
+  margin-bottom: 24px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -474,17 +474,49 @@ main .results {
       -ms-flex-align: center;
           align-items: center;
 }
+main .results ul {
+  width: 85%;
+}
 main .results > h3 {
   color: #2989F7;
 }
 main img {
   margin: 24px;
 }
-main ul {
-  width: 85%;
-}
 main li {
   margin: 12px 0;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 50px;
+  margin-top: 24px;
+  color: #FBFAFA;
+  background-color: #1A1A1A;
+}
+footer .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .hidden {
@@ -543,4 +575,77 @@ main li {
   height: 4rem;
   border-radius: 50px;
   z-index: 10;
+}
+
+.savedCitiesSections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.savedCitiesSections ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 12px;
+  width: 984px;
+}
+.savedCitiesSections li {
+  position: relative;
+  height: 200px;
+  width: 320px;
+  margin: 0;
+  border: 2px solid #1A1A1A;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.savedCitiesSections button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  margin: 0;
+  width: 42px;
+  height: 42px;
+  font-size: 3.6rem;
+}
+.savedCitiesSections p {
+  text-align: center;
+}
+.savedCitiesSections p.savedCity {
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+.savedCitiesSections p.savedContinent {
+  font-size: 2.8rem;
+}
+.savedCitiesSections p.savedScore {
+  font-size: 2.4rem;
 }

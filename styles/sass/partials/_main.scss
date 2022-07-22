@@ -1,8 +1,14 @@
 main {
     .results {
+        margin-bottom: 24px;
+
         @include flexCol;
         justify-content: center;
         align-items: center;
+
+        ul {
+            width: 85%;
+        }
 
         & > h3 {
             color: $themeBlue;
@@ -11,10 +17,6 @@ main {
 
     img {
         margin: 24px;
-    }
-
-    ul {
-        width: 85%;
     }
 
     li {

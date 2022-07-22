@@ -1,0 +1,17 @@
+footer {
+    @include flexCol;
+    justify-content: center;
+
+    height: 50px;
+    margin-top: 24px;
+
+    color: $themeWhite;
+    background-color: $themeBlack;
+
+
+    .wrapper {
+        @include flexCol;
+        justify-content: center;
+        align-items: center;
+    }
+}
