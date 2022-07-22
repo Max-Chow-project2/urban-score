@@ -473,6 +473,9 @@ main .results {
   display: block;
   width: 100%;
 }
+.accordion-button:hover {
+  cursor: pointer;
+}
 
 .accordion-container {
   overflow: hidden;
