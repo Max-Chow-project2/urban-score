@@ -1,6 +1,6 @@
 //transition styling
 * {
-    transition-property: filter, max-height, width;
+    transition-property: filter, max-height, width, border, color, background-color;
     transition-duration: 0.4s;
     transition-timing-function: ease-in-out;
 
@@ -41,11 +41,10 @@ fieldset {
 
 button {
     border: none;
-    font-size: 4rem;
+    font-size: 1.5rem;
     background-color: $themeYellow;
     padding: 10px 30px;
     border-radius: 10px;
-    text-transform: uppercase;
     font-family: $headerFont;
 
     &:hover,

@@ -353,7 +353,8 @@ qualityApp.addAccordionListener = () => {
         // Adjust max-height depending on visibility
         if (accordionContainerEl.classList.contains("accordion-container-visible")) {
             // Give accordion-container height of its content
-            accordionContainerEl.style.maxHeight = accordionContainerEl.scrollHeight + "px";
+            // accordionContainerEl.style.maxHeight = accordionContainerEl.scrollHeight + "px";
+            accordionContainerEl.style.maxHeight = "1000vh";
         } else {
             // Remove accordion-container's height
             accordionContainerEl.style.maxHeight = 0 + "px"
