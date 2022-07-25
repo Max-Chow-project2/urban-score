@@ -7,6 +7,9 @@ qualityApp.dropdownElement = document.querySelector('#cities');
 //Counter for saved cities
 qualityApp.savedCityCounter = 0;
 
+// Storage variable for the saved city image
+qualityApp.savedCityImageUrl;
+
 // Getter Methods for the City, City Href, and Continent
 qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].innerText;
 qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
@@ -90,7 +93,7 @@ qualityApp.displayCity = () => {
         })
         .then(function (imageData) {
             const cityImageObject = imageData.photos[0];
-            console.log(cityImageObject);
+            qualityApp.savedCityImageUrl = cityImageObject.image.web;
             qualityApp.displayImage(selectedCityName, cityImageObject);
         })
         .catch(function (error) {
@@ -299,14 +302,22 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
             <p class="savedContinent">${continentName}</p>
             <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>`;
 
-            //create an li for each city
+            //create an li for each city, and give it a background image
             const savedCityContainer = document.createElement('li');
+            savedCityContainer.style.backgroundImage = `linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%), url('${qualityApp.savedCityImageUrl}')`
 
-            //append the saved city to the li
+            savedCityContainer.style.backgroundPosition = `center`;
+            savedCityContainer.style.backgroundSize = 'cover';
+
+
+            const hah = document.querySelectorAll('button');
+            console.log(hah)
+
+            //append the saved city to the li, and the li to the ul
             savedCityContainer.append(savedCity);
-
-            //append the li container to the ul
             savedCitiesListElement.append(savedCityContainer);
+            
+            console.log(savedCityContainer);
 
             //check for empty saved cities section
             displayEmptyMsg();
