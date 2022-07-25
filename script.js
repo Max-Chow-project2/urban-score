@@ -110,7 +110,6 @@ qualityApp.displayCity = () => {
             }
         })
         .then(function (cityData) {
-            console.log(cityData);
             const cityScoresArray = cityData.categories;
             const cityDescription = cityData.summary;
             const cityAPIScore = cityData.teleport_city_score;
@@ -135,8 +134,6 @@ qualityApp.displayImage = (cityName, cityImage) => {
 
     cityImageElement.src = `${cityImage.image.web}`;
     cityImageElement.alt = `Photograph of ${cityName}`;
-
-    console.log(cityImageElement);
 }
 
 // Method to show continent name, city name, overall score, and city summary description
@@ -283,7 +280,6 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
             //add one to the saved city counter for empty message display
             qualityApp.savedCityCounter++;
-            console.log(`COUNTER: ${qualityApp.savedCityCounter}`)
 
             //add a close button element to each container
             const buttonElement = document.createElement('button');
@@ -309,19 +305,12 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
             savedCityContainer.style.backgroundPosition = `center`;
             savedCityContainer.style.backgroundSize = 'cover';
 
-
-            const hah = document.querySelectorAll('button');
-            console.log(hah)
-
             //append the saved city to the li, and the li to the ul
             savedCityContainer.append(savedCity);
             savedCitiesListElement.append(savedCityContainer);
-            
-            console.log(savedCityContainer);
 
             //check for empty saved cities section
             displayEmptyMsg();
-            console.log('should display')
 
             //event listener for each container's close button
             const closeButtons = document.querySelectorAll('.closeSavedCity');
@@ -364,7 +353,6 @@ qualityApp.addAccordionListener = () => {
         // Adjust max-height depending on visibility
         if (accordionContainerEl.classList.contains("accordion-container-visible")) {
             // Give accordion-container height of its content
-            // accordionContainerEl.style.maxHeight = accordionContainerEl.scrollHeight + "px";
             accordionContainerEl.style.maxHeight = "1000vh";
         } else {
             // Remove accordion-container's height
