@@ -684,6 +684,9 @@ footer .wrapper {
   h1 {
     text-align: center;
   }
+  header {
+    padding-top: 100px;
+  }
   .headerInfoContainer {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -734,6 +737,14 @@ footer .wrapper {
 @media only screen and (max-width: 500px) {
   .wrapper {
     width: 95%;
+  }
+  .results h3 span {
+    display: block;
+  }
+  .results img {
+    height: 300px;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .categoryContainer {
     width: 100%;
