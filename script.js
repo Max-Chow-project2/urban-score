@@ -7,6 +7,9 @@ qualityApp.dropdownElement = document.querySelector('#cities');
 //Counter for saved cities
 qualityApp.savedCityCounter = 0;
 
+// Storage variable for the saved city image
+qualityApp.savedCityImageUrl;
+
 // Getter Methods for the City, City Href, and Continent
 qualityApp.getCityName = () => qualityApp.dropdownElement.selectedOptions[0].innerText;
 qualityApp.getCityHref = () => qualityApp.dropdownElement.value;
@@ -90,7 +93,7 @@ qualityApp.displayCity = () => {
         })
         .then(function (imageData) {
             const cityImageObject = imageData.photos[0];
-            console.log(cityImageObject);
+            qualityApp.savedCityImageUrl = cityImageObject.image.web;
             qualityApp.displayImage(selectedCityName, cityImageObject);
         })
         .catch(function (error) {
@@ -107,7 +110,6 @@ qualityApp.displayCity = () => {
             }
         })
         .then(function (cityData) {
-            console.log(cityData);
             const cityScoresArray = cityData.categories;
             const cityDescription = cityData.summary;
             const cityAPIScore = cityData.teleport_city_score;
@@ -132,8 +134,6 @@ qualityApp.displayImage = (cityName, cityImage) => {
 
     cityImageElement.src = `${cityImage.image.web}`;
     cityImageElement.alt = `Photograph of ${cityName}`;
-
-    console.log(cityImageElement);
 }
 
 // Method to show continent name, city name, overall score, and city summary description
@@ -280,7 +280,6 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
 
             //add one to the saved city counter for empty message display
             qualityApp.savedCityCounter++;
-            console.log(`COUNTER: ${qualityApp.savedCityCounter}`)
 
             //add a close button element to each container
             const buttonElement = document.createElement('button');
@@ -299,18 +298,19 @@ qualityApp.manageSavedCities = (continentName, cityName, cityAPIScore) => {
             <p class="savedContinent">${continentName}</p>
             <p class="savedScore">${cityAPIScore.toFixed(1)}/100</p>`;
 
-            //create an li for each city
+            //create an li for each city, and give it a background image
             const savedCityContainer = document.createElement('li');
+            savedCityContainer.style.backgroundImage = `linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%), url('${qualityApp.savedCityImageUrl}')`
 
-            //append the saved city to the li
+            savedCityContainer.style.backgroundPosition = `center`;
+            savedCityContainer.style.backgroundSize = 'cover';
+
+            //append the saved city to the li, and the li to the ul
             savedCityContainer.append(savedCity);
-
-            //append the li container to the ul
             savedCitiesListElement.append(savedCityContainer);
 
             //check for empty saved cities section
             displayEmptyMsg();
-            console.log('should display')
 
             //event listener for each container's close button
             const closeButtons = document.querySelectorAll('.closeSavedCity');
@@ -353,7 +353,6 @@ qualityApp.addAccordionListener = () => {
         // Adjust max-height depending on visibility
         if (accordionContainerEl.classList.contains("accordion-container-visible")) {
             // Give accordion-container height of its content
-            // accordionContainerEl.style.maxHeight = accordionContainerEl.scrollHeight + "px";
             accordionContainerEl.style.maxHeight = "1000vh";
         } else {
             // Remove accordion-container's height
