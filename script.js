@@ -150,7 +150,7 @@ qualityApp.displaySummary = (continentName, cityName, cityAPIScore, citySummary)
     
     cityNameElement.innerHTML = `<h2>${cityName} (${continentName})</h2>`;
 
-    cityAPIScoreElement.textContent = `Overall Score: ${cityAPIScore.toFixed(1)} / 100`;
+    cityAPIScoreElement.innerHTML = `Overall Score: <span>${cityAPIScore.toFixed(1)} / 100</span>`;
 
     // This is used to strip extra <p> and <b> tags in the citySummary from the API
     citySummaryElement.innerHTML = citySummary;
