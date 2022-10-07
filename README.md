@@ -1,6 +1,6 @@
 # Urban Score
 ## Project Links
-[Github](https://github.com/Max-Chow-project2/urban-score)
+[Github](https://github.com/Max-Chow-project2/urban-score)  
 [Live Link](https://world-urban-score.netlify.app/)
 
 ## About
